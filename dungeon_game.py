@@ -8,4 +8,6 @@
 # check for win/lose
 # clear screen & redraw grid
 
-# testing github 
+def get_locations():
+	monster = None
+	
