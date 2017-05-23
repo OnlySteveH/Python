@@ -14,11 +14,12 @@ CELLS =     [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
 		    (0, 2), (1, 2), (2, 2), (3, 2), (4, 2),
 		    (0, 3), (1, 3), (2, 3), (3, 3), (4, 3),
 		    (0, 4), (1, 4), (2, 4), (3, 4), (4, 4)]
+monster = (0, 0)
+door = (1, 0)
+player = (2, 0)
 
 def get_locations():
-    monster = None
-    door = None
-    player = None
+
     return monster, door, player
 
 def set_locations():
@@ -26,10 +27,17 @@ def set_locations():
 
 def move_player(player, move):
     # get player location
-    # if move == LEFT, x - 1
+    if move == "LEFT":
+        player[0] -= 1
     # if move == RIGHT, x + 1
+    if move == "RIGHT":
+        player[0] += 1
     # if move == UP, y + 1
+    if move == "UP":
+        player[1] += 1
     # if move == DOWN, y - 1
+    if move == "DOWN":
+        player[1] = player[1] - 1
     return player
 
 def get_moves(player):
@@ -50,6 +58,7 @@ def get_moves(player):
 
 while True:
     print("Welcome to the Dungeon!")
+    set_locations()
     print("You are currently in room {}".format(player))  # fill with player position
     print("You can move {}".format(get_moves(player)))  # fill with available moves
     print("Enter QUIT to quit.")
@@ -61,8 +70,13 @@ while True:
         break
 
     # good move? change position
+    if move in get_moves(player):
+        move_player(player, move)
+    else:
+        # bad move - reject & retry
+        print("Invalid move - try again")
+        print("You can move {}".format(get_moves(player)))
 
-    # bad move? don't move
     # on the door? Win!
     # on the monster? lose
     # else loop
