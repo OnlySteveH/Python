@@ -8,37 +8,38 @@
 # check for win/lose
 # clear screen & redraw grid
 import random
-
+import os
+first_run = True
 CELLS =     [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
 		    (0, 1), (1, 1), (2, 1), (3, 1), (4, 1),
 		    (0, 2), (1, 2), (2, 2), (3, 2), (4, 2),
 		    (0, 3), (1, 3), (2, 3), (3, 3), (4, 3),
 		    (0, 4), (1, 4), (2, 4), (3, 4), (4, 4)]
-monster = (0, 0)
-door = (1, 0)
-player = (2, 0)
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def get_locations():
+    return random.sample(CELLS, 3)
 
-    return monster, door, player
-
-def set_locations():
-    monster, door, player = random.sample(CELLS, 3)
+# def set_locations():
+#     return random.sample(CELLS, 3)
 
 def move_player(player, move):
     # get player location
+    x, y = player
     if move == "LEFT":
-        player[0] -= 1
+        x -= 1
     # if move == RIGHT, x + 1
     if move == "RIGHT":
-        player[0] += 1
+        x += 1
     # if move == UP, y + 1
     if move == "UP":
-        player[1] += 1
+        y -= 1
     # if move == DOWN, y - 1
     if move == "DOWN":
-        player[1] = player[1] - 1
-    return player
+        y += 1
+    return x, y
 
 def get_moves(player):
     moves = ["LEFT", "RIGHT", "UP", "DOWN"]
@@ -56,27 +57,30 @@ def get_moves(player):
         moves.remove("RIGHT")
     return moves
 
+player, monster, door = get_locations()
+
 while True:
-    print("Welcome to the Dungeon!")
-    set_locations()
+    valid_moves = get_moves(player)
+    clear_screen()
+    if first_run:
+        print("Welcome to the Dungeon!")
+    first_run = False
     print("You are currently in room {}".format(player))  # fill with player position
-    print("You can move {}".format(get_moves(player)))  # fill with available moves
-    print("Enter QUIT to quit.")
+    print("You can move {}".format(", ".join(valid_moves)))  # fill with available moves
+    print("Enter QUIT or Q to quit.")
 
     move = input("> ")
     move = move.upper()
 
     if move == 'QUIT':
         break
-
     # good move? change position
-    if move in get_moves(player):
-        move_player(player, move)
+    if move in valid_moves:
+        player = move_player(player, move)
     else:
         # bad move - reject & retry
-        print("Invalid move - try again")
-        print("You can move {}".format(get_moves(player)))
-
+        print("Walls are hard. Don't run into them!")
+        # print("You can move {}".format(valid_moves))
     # on the door? Win!
     # on the monster? lose
     # else loop
