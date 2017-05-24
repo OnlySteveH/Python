@@ -1,14 +1,5 @@
-# draw grid
-# pick random location for player
-# pick random location for door
-# pick random location for monster
-# draw player in the grid
-# take input for movement
-# move player unless beyond grid limits
-# check for win/lose
-# clear screen & redraw grid
-import random
 import os
+import random
 
 CELLS =     [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
 		    (0, 1), (1, 1), (2, 1), (3, 1), (4, 1),
@@ -17,7 +8,8 @@ CELLS =     [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
 		    (0, 4), (1, 4), (2, 4), (3, 4), (4, 4)]
 
 def clear_screen():
-    os.system('cls' if os.name=='nt' else 'clear')
+    #os.system('cls' if os.name=='nt' else 'clear')
+    os.system('clear')
 
 def get_locations():
     return random.sample(CELLS, 3)
