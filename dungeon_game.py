@@ -70,6 +70,7 @@ def draw_map(player):
 
 def game_loop():
     player, monster, door = get_locations()
+    logging.info("Player: {}. Monster: {}. Door: {}.".format(player, monster, door))
     while True:
         clear_screen()
         unused=os.system("clear")
@@ -95,10 +96,12 @@ def game_loop():
         if player == door:
             clear_screen()
             print("\n ** You found the door and escaped!! ** \n")
+            logging.info("Player escaped!")
             break
         if player == monster:
             clear_screen()
             print("\n ** You got eaten by the monster - GAME OVER! ** \n")
+            logging.info("Player caught by monster")
             break
 
 clear_screen()
