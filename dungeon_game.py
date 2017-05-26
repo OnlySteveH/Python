@@ -1,8 +1,11 @@
 import logging
 import os
+import pdb
 import random
 
 logging.basicConfig(filename='game.log', level=logging.DEBUG)
+pdb.set_trace()
+
 
 CELLS =     [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0),
 		    (0, 1), (1, 1), (2, 1), (3, 1), (4, 1),
