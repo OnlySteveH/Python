@@ -1,4 +1,5 @@
 import datetime
+import webbrowser
 
 answer_format = '%m/%d'
 link_format = '%b_%d'
@@ -12,6 +13,7 @@ while True:
     try:
         date = datetime.datetime.strptime(answer, answer_format)
         output = link.format(date.strftime(link_format))
-        print(output)
+        # print(output)
+        webbrowser.open_new_tab(output)
     except ValueError:
         print("Bad format, try again")
