@@ -2,9 +2,20 @@ import random
 
 
 class Thief:
-    sneaky = True
+    # sneaky
+    # name
+
+    def __init__(self, name, sneaky, **kwargs):
+        self.name = name
+        self.sneaky = sneaky
+
+    for key, value in kwargs.items():
+        setattr(self, key, value)
+
 
     def pickpocket(self):
-        if self.sneaky:
-            return bool(random.randint(0, 1))
-        return False
+        return self.sneaky and bool(random.randint(0, 1))
+
+
+    def hide(self, light_level):
+        return self.sneaky and light_level < 10
