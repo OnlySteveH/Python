@@ -2,7 +2,6 @@ class Letter:
     def __init__(self, pattern=None):
         self.pattern = pattern
 
-
     def __str__(self):
         output = []
         for c in self.pattern:
