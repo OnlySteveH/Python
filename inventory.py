@@ -10,3 +10,6 @@ class Inventory:
 
     def __contains__(self, item):
         return item in self.slots
+
+    def __iter__(self):
+        yield from self.slots
