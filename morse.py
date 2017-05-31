@@ -11,8 +11,19 @@ class Letter:
                 output.append('dash')
         return "-".join(output)
 
+    @classmethod
+    def from_string(cls, dotdash):
+        output = []
+        array = dotdash.split('-')
+        for item in array:
+            if item == 'dot':
+                output.append('.')
+            if item == 'dash':
+                output.append('_')
+        return cls(output)
+
 class S(Letter):
     def __init__(self):
-        pattern = ['.', '_', '.']
+        pattern = ['.', '.', '.']
         super().__init__(pattern)
 
